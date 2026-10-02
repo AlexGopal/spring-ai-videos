@@ -1,21 +1,21 @@
-package com.fdmgroup.spring_ai_basic_chat_Service.Service;
+// package com.fdmgroup.spring_ai_basic_chat_Service.Service;
 
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.stereotype.Service;
+// import org.springframework.ai.chat.client.ChatClient;
+// import org.springframework.stereotype.Service;
 
-@Service
-public class ChatService {
+// @Service
+// public class ChatService {
 
-    private final ChatClient chatClient;
+//     private final ChatClient chatClient;
 
-    public ChatService(ChatClient.Builder builder) {
-        this.chatClient = builder.build();
-    }
+//     public ChatService(ChatClient.Builder builder) {
+//         this.chatClient = builder.build();
+//     }
 
-    public String ask(String prompt) {
-        return chatClient.prompt()
-                .user(prompt)
-                .call()
-                .content();
-    }
-}
+//     public String ask(String prompt) {
+//         return chatClient.prompt()
+//                 .user(prompt)
+//                 .call()
+//                 .content();
+//     }
+// }

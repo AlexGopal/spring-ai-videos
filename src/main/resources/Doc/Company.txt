@@ -1,0 +1,5 @@
+Skills Lab is Microsoft’s learning organization.
+
+Nikita Chitre is a Skills Lab Coach.
+
+Spring AI is a framework for integrating AI models into Java applications.

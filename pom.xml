@@ -55,6 +55,11 @@
     		<groupId>org.springframework.ai</groupId>
     		<artifactId>spring-ai-vector-store</artifactId>
 		</dependency>
+		<!-- RAG advisor for ChatClient -->
+		<dependency>
+    		<groupId>org.springframework.ai</groupId>
+    		<artifactId>spring-ai-vector-store-advisor</artifactId>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
