@@ -1,7 +1,10 @@
 package com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.Configuration;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +15,10 @@ public class ChatConfig {
     @Bean
     public ChatClient chatClient(
             ChatClient.Builder builder,
-            VectorStore vectorStore) {
+            VectorStore vectorStore,
+            ChatMemory chatMemory) {
+                //chatMemory stores the conversation history
+                // to maintain chatcontext
 
         /*
          * defaultAdvisors:
@@ -32,7 +38,29 @@ public class ChatConfig {
         // spring-ai-question-answer-advisor-notes.md
         return builder
             .defaultAdvisors(
+                //this creates an advisor that injects chat history into prompts
+                MessageChatMemoryAdvisor.builder(chatMemory)
+                    .build(),
                 QuestionAnswerAdvisor.builder(vectorStore)
+                    .searchRequest(
+                        SearchRequest.builder()
+                        .topK(5)
+                        .similarityThreshold(0.5)
+                        .build()
+                        // v4 .searchrequest is optional but it used to control how
+                        // vector search behaves, so how many documents to retrieve
+                        // and how relevent they must be
+                        // the threshhold is the minimum amount so it can return minimum
+                        // or greater
+                        // 6:16 after doing the configuration we need a
+                        // conversation id,
+                        /*
+                        conversation id will uniquely identify a chat session, 
+                        ensures memories are separated between users, so user 
+                        a gets memory a, user b gets memory b but everyone 
+                        shares the same knowledge base
+                        */
+                        )
                     .build() // Builds the QuestionAnswerAdvisor
             )
             .build(); // Builds the final ChatClient

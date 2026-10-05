@@ -20,8 +20,8 @@ public class RagControllerQnA {
     }
 
     @GetMapping
-    public String ask(@RequestParam String question) {
-        return ragServiceQnA.ask(question);
+    public String ask(@RequestParam String conversationId, @RequestParam String question) {
+        return ragServiceQnA.ask(conversationId, question);
     }
 
 
