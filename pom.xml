@@ -78,6 +78,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.fdmgroup.spring_ai_basic_chat_service.SpringAiBasicChatServiceApplication</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

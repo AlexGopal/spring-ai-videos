@@ -1,4 +1,4 @@
-package com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.Tools;
+package com.fdmgroup.spring_ai_basic_chat_service.DocumentInjectionQnAadv.Tools;
 
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Component;

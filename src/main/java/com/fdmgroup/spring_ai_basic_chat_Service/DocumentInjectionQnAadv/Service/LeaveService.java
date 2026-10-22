@@ -1,4 +1,4 @@
-package com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.Service;
+package com.fdmgroup.spring_ai_basic_chat_service.DocumentInjectionQnAadv.Service;
 
 import org.springframework.stereotype.Service;
 

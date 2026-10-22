@@ -1,4 +1,4 @@
-package com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.Configuration;
+package com.fdmgroup.spring_ai_basic_chat_service.DocumentInjectionQnAadv.Configuration;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
