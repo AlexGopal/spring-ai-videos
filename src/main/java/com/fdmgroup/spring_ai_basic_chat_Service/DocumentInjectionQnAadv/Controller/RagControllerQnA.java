@@ -1,11 +1,11 @@
-package com.fdmgroup.spring_ai_basic_chat_service.DocumentInjectionQnAadv.Controller;
+package com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fdmgroup.spring_ai_basic_chat_service.DocumentInjectionQnAadv.Service.RagServiceQnA;
+import com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.Service.RagServiceQnA;
 
 
 @RestController

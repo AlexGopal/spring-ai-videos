@@ -1,4 +1,4 @@
-package com.fdmgroup.spring_ai_basic_chat_service.DocumentInjectionQnAadv.Agents;
+package com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.Agents;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

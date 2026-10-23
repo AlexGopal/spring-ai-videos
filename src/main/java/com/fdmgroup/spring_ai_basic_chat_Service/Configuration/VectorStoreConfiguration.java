@@ -1,4 +1,4 @@
-package com.fdmgroup.spring_ai_basic_chat_service.Configuration;
+package com.fdmgroup.spring_ai_basic_chat_Service.Configuration;
 
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.vectorstore.SimpleVectorStore;

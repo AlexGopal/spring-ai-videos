@@ -1,4 +1,4 @@
-package com.fdmgroup.spring_ai_basic_chat_service.DocumentInjectionQnAadv.Configuration;
+package com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.Configuration;
 
 import java.beans.BeanProperty;
 

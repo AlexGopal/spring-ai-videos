@@ -1,6 +1,6 @@
-// package com.fdmgroup.spring_ai_basic_chat_service.Controller;
+// package com.fdmgroup.spring_ai_basic_chat_Service.Controller;
 
-// import com.fdmgroup.spring_ai_basic_chat_service.Service.ChatService;
+// import com.fdmgroup.spring_ai_basic_chat_Service.Service.ChatService;
 // import org.springframework.web.bind.annotation.GetMapping;
 // import org.springframework.web.bind.annotation.RequestMapping;
 // import org.springframework.web.bind.annotation.RequestParam;

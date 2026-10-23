@@ -1,4 +1,4 @@
-package com.fdmgroup.spring_ai_basic_chat_service.DocumentInjectionQnAadv.Agents;
+package com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.Agents;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -7,7 +7,7 @@ import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
 
-import com.fdmgroup.spring_ai_basic_chat_service.DocumentInjectionQnAadv.Tools.PolicyTools;
+import com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.Tools.PolicyTools;
 
 @Service
 public class PolicyAgent {

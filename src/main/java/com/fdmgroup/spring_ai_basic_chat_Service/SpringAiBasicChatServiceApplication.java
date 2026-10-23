@@ -1,4 +1,4 @@
-package com.fdmgroup.spring_ai_basic_chat_service;
+package com.fdmgroup.spring_ai_basic_chat_Service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

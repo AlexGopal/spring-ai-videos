@@ -1,12 +1,12 @@
-package com.fdmgroup.spring_ai_basic_chat_service.DocumentInjectionQnAadv.Controller;
+package com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.Controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fdmgroup.spring_ai_basic_chat_service.DocumentInjectionQnAadv.DTO.ChatRequest;
-import com.fdmgroup.spring_ai_basic_chat_service.DocumentInjectionQnAadv.Service.CompanyCopilot;
+import com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.DTO.ChatRequest;
+import com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.Service.CompanyCopilot;
 
 @RestController 
 @RequestMapping("/api/chat")

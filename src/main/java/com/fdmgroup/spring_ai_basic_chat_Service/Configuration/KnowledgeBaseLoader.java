@@ -1,4 +1,4 @@
-// package com.fdmgroup.spring_ai_basic_chat_service.Configuration;
+// package com.fdmgroup.spring_ai_basic_chat_Service.Configuration;
 
 // import java.beans.BeanProperty;
 // import java.util.List;
