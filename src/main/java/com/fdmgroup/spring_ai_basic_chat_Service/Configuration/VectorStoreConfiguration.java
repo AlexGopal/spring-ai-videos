@@ -1,4 +1,4 @@
-package com.fdmgroup.spring_ai_basic_chat_Service.Configuration;
+package com.fdmgroup.spring_ai_basic_chat_service.Configuration;
 
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
@@ -17,6 +17,24 @@ public class VectorStoreConfiguration {
 
     @Bean
     VectorStore vectorStore(EmbeddingModel embeddingModel) {
+        return SimpleVectorStore.builder(embeddingModel)
+        .build();
+    }
+
+    @Bean
+    VectorStore hrVectorStore(EmbeddingModel embeddingModel) {
+        return SimpleVectorStore.builder(embeddingModel)
+        .build();
+    }
+
+    @Bean
+    VectorStore itVectorStore(EmbeddingModel embeddingModel) {
+        return SimpleVectorStore.builder(embeddingModel)
+        .build();
+    }
+
+    @Bean
+    VectorStore policyVectorStore(EmbeddingModel embeddingModel) {
         return SimpleVectorStore.builder(embeddingModel)
         .build();
     }

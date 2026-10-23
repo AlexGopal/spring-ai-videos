@@ -1,4 +1,4 @@
-// package com.fdmgroup.spring_ai_basic_chat_Service.Service;
+// package com.fdmgroup.spring_ai_basic_chat_service.Service;
 
 // import java.util.List;
 // import java.util.stream.Collectors;

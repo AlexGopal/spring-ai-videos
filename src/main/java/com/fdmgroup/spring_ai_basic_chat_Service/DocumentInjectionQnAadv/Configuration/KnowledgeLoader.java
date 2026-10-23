@@ -1,4 +1,4 @@
-package com.fdmgroup.spring_ai_basic_chat_Service.DocumentInjectionQnAadv.Configuration;
+package com.fdmgroup.spring_ai_basic_chat_service.DocumentInjectionQnAadv.Configuration;
 
 import java.util.List;
 
@@ -6,17 +6,29 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.TextReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+// Register this class as a source of Spring bean definitions.
 @Configuration
 public class KnowledgeLoader {
 
+    // Create a runner that loads knowledge when the application starts.
     @Bean
     CommandLineRunner loadKnowledge(
-            VectorStore vectorStore,
+
+            // Qualifiers select which VectorStore bean Spring injects.
+            @Qualifier("vectorStore") VectorStore vectorStore,
+            @Qualifier("hrVectorStore") VectorStore hrVectorStore,
+            @Qualifier("itVectorStore") VectorStore itVectorStore,
+            @Qualifier("policyVectorStore") VectorStore policyVectorStore,
+
+            // Currently unused; the resolver below finds our resources instead.
             ResourceLoader resourceLoader) {
 
         return args -> {
@@ -26,8 +38,9 @@ public class KnowledgeLoader {
              *
              * Company.txt -> Reader -> Documents -> Chunks -> VectorStore
              *
-             * ResourceLoader:
-             * - Finds the original source resource (Company.txt).
+             * PathMatchingResourcePatternResolver:
+             * - Finds the original source resource using a path.
+             * - Can also resolve patterns matching multiple resources.
              *
              * VectorStore:
              * - We ADD the processed knowledge here.
@@ -35,74 +48,77 @@ public class KnowledgeLoader {
              *   so relevant knowledge can be retrieved during LLM requests.
              */
 
-            var resource =
-                resourceLoader.getResource("classpath:doc/Company.txt");
+            // Find resources using specific paths or matching file patterns.
+            PathMatchingResourcePatternResolver resolver =
+                    new PathMatchingResourcePatternResolver();
 
-            var reader = new TextReader(resource);
-
-            /*
-             * reader.get():
-             * - Reads the source resource.
-             * - Extracts its CONTENT into Spring AI Document object(s).
-             * - Documents can also contain metadata about the content/resource.
-             * - This does NOT perform our chunking yet.
-             *
-             * TextReader will normally give us one Document for this text file,
-             * but the API returns List<Document> because other readers can
-             * produce multiple Documents. such as PagePdfDocumentReader
-             
-                Resource pdfResource =
-                resourceLoader.getResource(
-                    "classpath:doc/CompanyHandbook.pdf"
-                );
-
-            PagePdfDocumentReader reader =
-                new PagePdfDocumentReader(pdfResource);
-
-            List<Document> docs = reader.get();
-             */
-
-            // this will automatically go through each source file we dont need a forloop
-            // or stream to do it and produce the different documents
-            List<Document> docs = reader.get();
-
-            /*
-             * Configure how the Documents should be split into smaller chunks.
-             * The chunks are also Spring AI Document objects.
-             */
+            // Configure how the text will be split into smaller chunks.
             TokenTextSplitter splitter = TokenTextSplitter.builder()
-                .withChunkSize(500)
-                .withMinChunkSizeChars(100)
-                .withMinChunkLengthToEmbed(5)
-                .withMaxNumChunks(1000)
-                .withKeepSeparator(true)
-                .build();
+                    .withChunkSize(500)             // Target roughly 500 tokens per chunk.
+                    .withMinChunkSizeChars(100)     // Threshold for choosing a sentence boundary.
+                    .withMinChunkLengthToEmbed(5)   // Character threshold to filter tiny chunks.
+                    .withMaxNumChunks(1000)         // Limit splitting iterations per document.
+                    .withKeepSeparator(true)        // Preserve separators such as line breaks.
+                    .build();
 
-            /*
-             * Chunking happens HERE.
-             *
-             * splitter.apply(docs) processes the entire List<Document>.
-             * We do not need to write our own for-loop or stream.
-             *
-             * List<Document> docs
-             *          ↓
-             * TokenTextSplitter
-             *          ↓
-             * List<Document> chunks
-             */
-            List<Document> chunks = splitter.apply(docs);
+            // Track the combined chunk count from our loading calls.
+            int totalChunks = 0;
 
-            /*
-             * Add the smaller chunk Documents to the VectorStore.
-             * They can later be retrieved by QuestionAnswerAdvisor for RAG.
-             *
-             * For the full explanation, see:
-             * spring-ai-knowledge-loader-documents-chunking-lesson.md
-             */
-            vectorStore.add(chunks);
+            // Load ONLY Company.txt into the main vector store.
+            // HR, IT, and policy stores need their own loadIntoStore(...) calls.
+            totalChunks += loadIntoStore(resolver, "classpath:Doc/Company.txt", vectorStore, splitter);
 
-            System.out.println("Loaded " + chunks.size()+ " documents into the vector store");
+            totalChunks += loadIntoStore(resolver, "classpath:Doc/hr.txt", hrVectorStore, splitter);
+
+            totalChunks += loadIntoStore(resolver, "classpath:Doc/it.txt", itVectorStore, splitter);
+
+            totalChunks += loadIntoStore(resolver, "classpath:Doc/policy.txt", policyVectorStore, splitter);
+            // totalChunks is currently collected but not printed or used further.
+
+            System.out.println("total chunks loaded" + totalChunks);
         };
+    }
+
+    // Reuse the same reading/splitting logic for a supplied path and target store.
+    private int loadIntoStore(
+            PathMatchingResourcePatternResolver resolver,
+            String path,
+            VectorStore targetStore,
+            TokenTextSplitter splitter) throws Exception {
+
+        // Resolve all resources matching this path (currently one specific file).
+        Resource[] resources = resolver.getResources(path);
+
+        // Count chunks added during this helper call.
+        int chunksLoaded = 0;
+
+        // Process each matching file.
+        for (Resource resource : resources) {
+
+            // Read the file into Documents containing text and metadata.
+            // Reading does not perform our TokenTextSplitter chunking yet.
+            TextReader reader = new TextReader(resource);
+            List<Document> documents = reader.get();
+
+            // Split all input Documents into smaller Documents (chunks).
+            // The source metadata is carried into the resulting chunks.
+            List<Document> chunks = splitter.apply(documents);
+
+            // Add chunks to the chosen store; an embedding-based store generates
+            // embeddings using its configured model and stores them for retrieval.
+            targetStore.add(chunks);
+
+            // Update the count and report how many chunks this file produced.
+            chunksLoaded += chunks.size();
+
+            System.out.println(
+                    "loaded" + resource.getFilename()
+                            + " => " + chunks.size() + "chunks"
+            );
+        }
+
+        // Return this call's chunk count to the startup runner.
+        return chunksLoaded;
     }
 }
 

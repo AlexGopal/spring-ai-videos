@@ -60,6 +60,11 @@
     		<groupId>org.springframework.ai</groupId>
     		<artifactId>spring-ai-vector-store-advisor</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-starter-mcp-client</artifactId>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -70,6 +75,14 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>			
+
+			<dependency>
+				<groupId>org.springframework.ai</groupId>
+				<artifactId>spring-ai-bom</artifactId>
+				<version>2.0.1</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -78,6 +91,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.fdmgroup.spring_ai_basic_chat_service.SpringAiBasicChatServiceApplication</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

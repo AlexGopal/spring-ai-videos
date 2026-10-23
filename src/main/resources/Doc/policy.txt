@@ -1,0 +1,41 @@
+Corporate Policies
+
+Code of Conduct
+
+Employees must maintain a respectful and professional workplace environment.
+
+Data Security Policy
+
+Confidential company information must not be shared outside the organization.
+
+Employees must:
+
+- Use company-approved devices
+- Enable MFA
+- Follow password security requirements
+
+Remote Work Policy
+
+Remote work is permitted with manager approval.
+
+Employees are expected to:
+
+- Be available during business hours
+- Maintain a secure workspace
+- Attend required meetings
+
+Travel Policy
+
+Business travel requires manager approval.
+
+Receipts must be submitted within 10 business days of travel completion.
+
+AI Usage Policy
+
+Employees may use approved AI tools for business purposes.
+
+Confidential customer data must not be entered into public AI systems.
+
+Information Retention Policy
+
+Business records must be retained according to legal and regulatory requirements.

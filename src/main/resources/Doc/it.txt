@@ -1,0 +1,39 @@
+IT Support Knowledge Base
+
+VPN Access
+
+Employees must use Microsoft Entra ID credentials to access the company VPN.
+
+If VPN connectivity issues occur:
+
+1. Verify internet connectivity.
+2. Restart the VPN client.
+3. Re-authenticate using company credentials.
+
+Password Reset
+
+Employees can reset passwords using the Self-Service Password Portal.
+
+Laptop Support
+
+Standard company laptops are:
+
+- Windows 11 Enterprise
+- Microsoft 365 Apps
+- Microsoft Defender
+
+Software Requests
+
+Software installation requests must be submitted through the Service Desk Portal.
+
+Microsoft Teams
+
+Teams is the approved platform for internal communication and meetings.
+
+Multi-Factor Authentication
+
+All employees must use MFA for company systems.
+
+Printer Support
+
+Network printers are managed by the IT Operations team.
