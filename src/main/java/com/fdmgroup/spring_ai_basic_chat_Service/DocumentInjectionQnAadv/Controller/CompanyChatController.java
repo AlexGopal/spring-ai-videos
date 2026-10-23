@@ -22,6 +22,4 @@ public class CompanyChatController {
         return companyCopilot.ask(request.conversationId(), request.question());
     }
 
-    
-        
 }
